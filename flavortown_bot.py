@@ -1,5 +1,5 @@
 #flavortown_bot
-from telegram_wrapper import *
+from lib.telegram_wrapper import *
 import importlib
 
 TOKEN = None

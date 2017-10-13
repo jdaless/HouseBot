@@ -1,4 +1,4 @@
-from telegram_wrapper import *
+from lib.telegram_wrapper import *
 
 # text = update["message"]["text"]
 
