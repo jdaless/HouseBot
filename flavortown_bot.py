@@ -27,13 +27,14 @@ def parse_all(updates):
             chat = update["message"]["chat"]["id"]
             sent_from = update["message"]["from"]
 
-            if str(chat) == HOUSE_CHAT_ID and text.split()[0] == "bot,":
-                args = text.split()[1:]
-                com = importlib.import_module("commands.group."+args[0].lower())
-                if(len(args) > 1):
-                    com.command(t, update, args[1:])
-                else:
-                    com.command(t, update, None)
+            if str(chat) == HOUSE_CHAT_ID:
+                if text.split()[0] == "bot,":
+                    args = text.split()[1:]
+                    com = importlib.import_module("commands.group."+args[0].lower())
+                    if(len(args) > 1):
+                        com.command(t, update, args[1:])
+                    else:
+                        com.command(t, update, None)
             elif str(chat) != HOUSE_CHAT_ID and sent_from["id"] in HOUSE_IDS:
                 args = text.split()
                 com = importlib.import_module("commands.dm."+args[0].lower())
@@ -42,7 +43,7 @@ def parse_all(updates):
                 else:
                     com.command(t, update, None)
             else:
-                send_message("You aren't part of the house, who are you?", chat)
+                t.send_message("You aren't part of the house, who are you?", chat)
         except Exception as e:
             print(e)
     
