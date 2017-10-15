@@ -33,4 +33,11 @@ Bot will send a message to the group chat letting everyone know there is someone
 
 ## Setup
 
-To work, the bot needs to run in python3, and needs a private.txt file with the bot api key, the house's group chat id, and each member of the house's telegram user id in that order. 
+The following instructions are for Ubuntu Server 16.04. 
+` sudo apt-get install python3 `
+` sudo apt-get install python-pip3 `
+` sudo pip3 install flask `
+
+Create a private.txt file with the bot api key, the house's group chat id, and each member of the house's telegram user id in that order on seperate lines. 
+
+` python3 flavortown_bot.py ` 
