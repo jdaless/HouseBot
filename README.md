@@ -1,5 +1,7 @@
 # HouseBot
-A telegram bot for automating activities in a smart-ish home. 
+A telegram bot for automating activities in a smart-ish home.
+
+There are two ways to interact with the bot, chatting with it on telegram and hitting its flask API. 
 
 ## Current commands:
 
@@ -22,6 +24,12 @@ Bot says hi back
 ` say {args} `
 
 Bot will repeat args said to it
+
+## API
+
+` {address}:5000/doorbell `
+
+Bot will send a message to the group chat letting everyone know there is someone at the door.
 
 ## Setup
 

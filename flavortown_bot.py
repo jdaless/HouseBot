@@ -1,6 +1,7 @@
 #flavortown_bot
 from lib.telegram_wrapper import *
-import importlib
+import lib.api as api
+import importlib, threading
 
 TOKEN = None
 HOUSE_CHAT_ID = None
@@ -49,6 +50,10 @@ def parse_all(updates):
     
 
 def main():
+    apiThread = threading.Thread(target = api.apiThread, args=[t])
+    apiThread.daemon = True
+    apiThread.start()
+
     last_update_id = None
     while True:
         updates = t.get_updates(last_update_id)
