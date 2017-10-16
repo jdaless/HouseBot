@@ -6,10 +6,12 @@ import importlib, threading
 TOKEN = None
 HOUSE_CHAT_ID = None
 HOUSE_IDS = []
+ADDRESS = ""
 
 with open("private.txt") as keyFile:
     TOKEN = keyFile.readline()[0:45]
     HOUSE_CHAT_ID = keyFile.readline()[0:10]
+    ADDRESS = keyFile.readline()[0:12]
     stop = False
     while not stop:
         line = keyFile.readline()
@@ -50,7 +52,7 @@ def parse_all(updates):
     
 
 def main():
-    apiThread = threading.Thread(target = api.apiThread, args=[t])
+    apiThread = threading.Thread(target = api.apiThread, args=[t, ADDRESS])
     apiThread.daemon = True
     apiThread.start()
 

@@ -38,6 +38,6 @@ The following instructions are for Ubuntu Server 16.04.
 ` sudo apt-get install python-pip3 `
 ` sudo pip3 install flask `
 
-Create a private.txt file with the bot api key, the house's group chat id, and each member of the house's telegram user id in that order on seperate lines. 
+Create a private.txt file with the bot api key, the house's group chat id, the server address, and each member of the house's telegram user id in that order on seperate lines. 
 
 ` python3 flavortown_bot.py ` 

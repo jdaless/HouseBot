@@ -1,10 +1,10 @@
 from flask import Flask
 from lib.telegram_wrapper import *
 
-def apiThread(t):
+def apiThread(t, address):
 	app = Flask(__name__)
 	app.config['DEBUG'] = False
-	app.config['SERVER_NAME'] = "24.29.28.245:5000"
+	app.config['SERVER_NAME'] = address + ":5000"
 
 	@app.route("/doorbell")
 	def doorbell():
