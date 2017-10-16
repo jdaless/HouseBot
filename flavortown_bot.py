@@ -1,14 +1,17 @@
 #flavortown_bot
 from lib.telegram_wrapper import *
-import importlib
+import lib.api as api
+import importlib, threading, os.path
 
 TOKEN = None
 HOUSE_CHAT_ID = None
 HOUSE_IDS = []
+ADDRESS = ""
 
 with open("private.txt") as keyFile:
     TOKEN = keyFile.readline()[0:45]
     HOUSE_CHAT_ID = keyFile.readline()[0:10]
+    ADDRESS = keyFile.readline()[0:12]
     stop = False
     while not stop:
         line = keyFile.readline()
@@ -20,6 +23,12 @@ with open("private.txt") as keyFile:
 
 t = Telegram(TOKEN, HOUSE_CHAT_ID, HOUSE_IDS)
 
+def runCommand(com, update, args):
+    if(len(args) > 1):
+        com.command(t, update, args)
+    else:
+        com.command(t, update, None)
+
 def parse_all(updates):
     for update in updates["result"]:
         try:
@@ -30,18 +39,23 @@ def parse_all(updates):
             if str(chat) == HOUSE_CHAT_ID:
                 if text.split()[0] == "bot,":
                     args = text.split()[1:]
-                    com = importlib.import_module("commands.group."+args[0].lower())
-                    if(len(args) > 1):
-                        com.command(t, update, args[1:])
+
+                    if(os.path.isfile("commands/" + args[0].lower() + ".py")):
+                        com = importlib.import_module("commands."+args[0].lower())
+                        runCommand(com, update, args[1:])
                     else:
-                        com.command(t, update, None)
+                        com = importlib.import_module("commands.group."+args[0].lower())
+                        runCommand(com, update, args[1:])
+
             elif str(chat) != HOUSE_CHAT_ID and sent_from["id"] in HOUSE_IDS:
                 args = text.split()
-                com = importlib.import_module("commands.dm."+args[0].lower())
-                if(len(args) > 1):
-                    com.command(t, update, args[1:])
+
+                if(os.path.isfile("commands/" + args[0].lower() + ".py")):
+                    com = importlib.import_module("commands."+args[0].lower())
+                    runCommand(com, update, args[1:])
                 else:
-                    com.command(t, update, None)
+                    com = importlib.import_module("commands.dm."+args[0].lower())
+                    runCommand(com, update, args[1:])
             else:
                 t.send_message("You aren't part of the house, who are you?", chat)
         except Exception as e:
@@ -49,6 +63,10 @@ def parse_all(updates):
     
 
 def main():
+    apiThread = threading.Thread(target = api.apiThread, args=[t, ADDRESS])
+    apiThread.daemon = True
+    apiThread.start()
+
     last_update_id = None
     while True:
         updates = t.get_updates(last_update_id)
