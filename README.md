@@ -5,6 +5,10 @@ A telegram bot for automating activities in a smart-ish home.
 
 ### Group Chat
 
+` bot, choose {args} `
+
+Bot will choose one of the (space separated) args given to it. 
+
 ` bot, say {args} `
 
 Bot will repeat args said to it
@@ -14,6 +18,10 @@ Bot will repeat args said to it
 Bot will tag everyone in the house
 
 ### DM
+
+` bot, choose {args} `
+
+Bot will choose one of the (space separated) args given to it. 
 
 ` hello `
 
