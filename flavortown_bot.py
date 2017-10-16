@@ -24,7 +24,7 @@ with open("private.txt") as keyFile:
 t = Telegram(TOKEN, HOUSE_CHAT_ID, HOUSE_IDS)
 
 def runCommand(com, update, args):
-    if(len(args) > 1):
+    if(len(args) > 0):
         com.command(t, update, args)
     else:
         com.command(t, update, None)
