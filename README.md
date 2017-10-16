@@ -1,5 +1,7 @@
 # HouseBot
-A telegram bot for automating activities in a smart-ish home. 
+A telegram bot for automating activities in a smart-ish home.
+
+There are two ways to interact with the bot, chatting with it on telegram and hitting its flask API. 
 
 ## Current commands:
 
@@ -39,6 +41,19 @@ Bot will repeat args said to it
 
 Bot will tell you your name
 
+## API
+
+` {address}:5000/doorbell `
+
+Bot will send a message to the group chat letting everyone know there is someone at the door.
+
 ## Setup
 
-To work, the bot needs to run in python3, and needs a private.txt file with the bot api key, the house's group chat id, and each member of the house's telegram user id in that order. 
+The following instructions are for Ubuntu Server 16.04. 
+` sudo apt-get install python3 `
+` sudo apt-get install python-pip3 `
+` sudo pip3 install flask `
+
+Create a private.txt file with the bot api key, the house's group chat id, the server address, and each member of the house's telegram user id in that order on seperate lines. 
+
+` python3 flavortown_bot.py ` 
