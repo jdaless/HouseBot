@@ -1,4 +1,5 @@
 from flask import Flask
+import time
 from lib.telegram_wrapper import *
 
 def apiThread(t, address):
@@ -15,4 +16,5 @@ def apiThread(t, address):
 		app.run(host='0.0.0.0')
 	except Exception as e:
 		print(e)
+		time.sleep(5)
 		apiThread(t, address)
