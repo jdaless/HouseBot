@@ -49,10 +49,11 @@ Bot will send a message to the group chat letting everyone know there is someone
 
 ## Setup
 
-The following instructions are for Ubuntu Server 16.04. 
-` sudo apt-get install python3 `
-` sudo apt-get install python-pip3 `
-` sudo pip3 install flask `
+The following instructions are for Ubuntu Server 16.04
+```bash
+sudo apt-get install -Y python3 python-pip3 `
+sudo pip3 install flask
+```
 
 Create a private.txt file with the bot api key, the house's group chat id, the server address, and each member of the house's telegram user id in that order on seperate lines. 
 
