@@ -52,9 +52,11 @@ Bot will send a message to the group chat letting everyone know there is someone
 The following instructions are for Ubuntu Server 16.04
 ```bash
 sudo apt-get install -Y python3 python-pip3 `
-sudo pip3 install flask
+sudo -H pip3 install flask configparser
 ```
 
-Create a private.txt file with the bot api key, the house's group chat id, the server address, and each member of the house's telegram user id in that order on seperate lines. 
+Create a telegram-housebot.conf following the example in telegram-housebot.conf.example. Be sure to include the Telegram api key, the house's group chat id, the server address, and each member of the house's telegram user id
 
-` python3 flavortown_bot.py ` 
+```bash
+./flavortown_bot.py
+```

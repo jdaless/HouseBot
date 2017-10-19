@@ -1,25 +1,23 @@
-#flavortown_bot
+#!/usr/bin/env python3
 from lib.telegram_wrapper import *
 import lib.api as api
-import importlib, threading, os.path
+import importlib, threading, os.path, configparser
 
-TOKEN = None
-HOUSE_CHAT_ID = None
+TOKEN = ""
+HOUSE_CHAT_ID = ""
 HOUSE_IDS = []
 ADDRESS = ""
 
-with open("private.txt") as keyFile:
-    TOKEN = keyFile.readline()[0:45]
-    HOUSE_CHAT_ID = keyFile.readline()[0:10]
-    ADDRESS = keyFile.readline()[0:12]
-    stop = False
-    while not stop:
-        line = keyFile.readline()
-        if line != "":
-            if line[0] != "#":
-                HOUSE_IDS.append(int(line[0:9]))
-        elif line == "":
-            stop = True
+config = configparser.RawConfigParser(allow_no_value=True);
+config.read("telegram-housebot.conf");
+if config.has_option("Telegram", "token"):
+    TOKEN = config.get("Telegram", "token");
+if config.has_option("Telegram", "chat-id"):
+    HOUSE_CHAT_ID = config.get("Telegram", "chat-id")
+if config.has_option("Telegram", "user-ids"):
+    HOUSE_IDS = config.get("Telegram", "user-ids").split(" ")
+if config.has_option("API", "ip"):
+    ADDRESS = config.get("API", "ip")
 
 t = Telegram(TOKEN, HOUSE_CHAT_ID, HOUSE_IDS)
 
