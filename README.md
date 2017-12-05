@@ -19,6 +19,10 @@ Bot will repeat args said to it
 
 Bot will tag everyone in the house
 
+` bot, santa `
+
+Bot will arrange a secret santa gift exchange. Each member of the house will receive their number and the number of their gift recipient. Users should then tell eachother their own numbers. The algorithm used does not allow inner loops (such as A->B and then B->A).
+
 ### DM
 
 ` bot, choose {args} `
