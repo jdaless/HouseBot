@@ -45,7 +45,7 @@ def parse_all(updates):
                         com = importlib.import_module("commands.group."+args[0].lower())
                         runCommand(com, update, args[1:])
 
-            elif str(chat) != HOUSE_CHAT_ID and sent_from["id"] in HOUSE_IDS:
+            elif str(chat) != HOUSE_CHAT_ID and str(sent_from["id"]) in HOUSE_IDS:
                 args = text.split()
 
                 if(os.path.isfile("commands/" + args[0].lower() + ".py")):
